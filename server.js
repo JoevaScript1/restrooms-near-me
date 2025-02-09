@@ -8,7 +8,6 @@ const flash = require("express-flash");
 const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
-const todoRoutes = require("./routes/todos");
 const restroomRoutes = require("./routes/restrooms");
 const {
   getRestrooms,
@@ -25,8 +24,9 @@ app.use(express.json()); // For JSON payloads
 app.use(express.urlencoded({ extended: true }));
 connectDB();
 
-app.use("/api/restrooms/save", saveRestroom);
-app.use("/api/restrooms", getRestrooms);
+// app.use("/api/restrooms", getRestrooms);
+// app.use("/api/restrooms/save", saveRestroom);
+
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
@@ -50,8 +50,7 @@ app.use(passport.session());
 app.use(flash());
 
 app.use("/", mainRoutes);
-app.use("/todos", todoRoutes);
-app.use("/restrooms", restroomRoutes);
+app.use("/api/restrooms", restroomRoutes);
 
 app.get("/map", renderMap);
 

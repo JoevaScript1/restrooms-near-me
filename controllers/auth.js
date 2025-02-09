@@ -4,7 +4,7 @@ const User = require("../models/User");
 
 exports.getLogin = (req, res) => {
   if (req.user) {
-    return res.redirect("/restrooms/map");
+    return res.redirect("/api/restrooms/map");
   }
   res.render("login", {
     title: "Login",
@@ -39,7 +39,7 @@ exports.postLogin = (req, res, next) => {
         return next(err);
       }
       req.flash("success", { msg: "Success! You are logged in." });
-      res.redirect(req.session.returnTo || "/restrooms/map");
+      res.redirect(req.session.returnTo || "/api/restrooms/map");
     });
   })(req, res, next);
 };

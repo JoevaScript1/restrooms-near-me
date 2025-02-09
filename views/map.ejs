@@ -1,0 +1,45 @@
+<!-- views/map.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Restrooms Map</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmH_ZYqBaPDI1TY4YmARHKptENgqIKe24"></script>
+    <style>
+        #map 
+        { height: 600px; width: 100%; }
+        .button {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+    }
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 1rem; /* Optional: Adds space between buttons */
+      margin-top: 1rem;
+    }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script src="/js/restroomsMap.js"></script>
+    <div class="button-container">
+        <a id="list-view-link" class="button">List View</a>
+    </div>
+    <script>
+        navigator.geolocation.getCurrentPosition((position) => {
+            const { latitude, longitude } = position.coords;
+            const listViewLink = document.getElementById('list-view-link');
+            listViewLink.href = `/api/restrooms?latitude=${latitude}&longitude=${longitude}&numberOnPage=50&page=1`;
+        }, (error) => {
+            console.error('Error getting location:', error);
+        });
+    </script>
+</body>
+</html>

@@ -1,5 +1,6 @@
 const fetch = require("node-fetch");
 const Restroom = require("../models/Restrooms");
+const User = require("../models/User");
 
 const getRestrooms = async (req, res) => {
   console.log("test");
@@ -37,7 +38,7 @@ async function saveRestroom(name, street, distance, accessible, user) {
     street: street || "Not available",
     distance: parseFloat(distance) || 0,
     accessible: Boolean(accessible),
-    user,
+    user: req.user._id,
   };
 
   console.log("Payload being sent:", payload);

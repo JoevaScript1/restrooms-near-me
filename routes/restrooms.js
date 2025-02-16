@@ -12,7 +12,7 @@ const { ensureAuth } = require("../middleware/auth");
 router.get("/", getRestrooms);
 console.log("router get restroom");
 
-router.post("/save", async (req, res) => {
+router.post("/save", ensureAuth, async (req, res) => {
   console.log("save restroom routes");
   const { name, street, distance, accessible, user } = req.body;
   const savedRestroom = await saveRestroom(

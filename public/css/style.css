@@ -81,3 +81,18 @@ header {
     gap: 1rem; /* Optional: Adds space between buttons */
     margin-top: 1rem;
 }
+
+.gm-ui-hover-effect .gm-ui-button {
+    width: 20px !important; /* Smaller width */
+    height: 20px !important; /* Smaller height */
+    font-size: 16px !important; /* Adjust the size of the X icon */
+    padding: 0 !important; /* Remove unnecessary padding */
+    background-color: transparent !important; /* Optional: Make background transparent */
+    border: none !important; /* Optional: Remove border */
+  }
+  
+  /* Optional: Position the close button closer */
+  .gm-style-iw-d {
+    top: 5px !important; /* Adjust top position */
+    right: 5px !important; /* Adjust right position */
+  }

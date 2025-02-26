@@ -8,6 +8,7 @@ module.exports = {
       return next();
     } else {
       res.redirect("/");
+      console.log("ensureAUth error");
     }
   },
 };

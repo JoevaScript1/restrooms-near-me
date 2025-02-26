@@ -32,33 +32,34 @@ const renderMap = (req, res) => {
   res.render("map");
 };
 
-async function saveRestroom(name, street, distance, accessible, user) {
-  const payload = {
-    name: name || "Unnamed Restroom",
-    street: street || "Not available",
-    distance: parseFloat(distance) || 0,
-    accessible: Boolean(accessible),
-    user: req.user._id,
-  };
+async function saveRestroom({ name, street, distance, accessible, user }) {
+  try {
+    const payload = {
+      name: name || "Unnamed Restroom",
+      street: street || "Not available",
+      distance: parseFloat(distance) || 0,
+      accessible: Boolean(accessible),
+      user,
+    };
 
-  console.log("Payload being sent:", payload);
+    console.log("Payload being saved:", payload);
 
-  const restrooms = await Restroom.create({
-    name,
-    street,
-    distance,
-    accessible,
-    user,
-  });
+    const restroom = await Restroom.create(payload);
+    return restroom; // Return created restroom
+  } catch (error) {
+    console.error("Error saving restroom:", error);
+    throw error; // Ensure the error is caught in route handlers
+  }
 }
 
 const getUserRestrooms = async (req, res) => {
   try {
-    const restrooms = await Restroom.find({ user: req.user.id });
-    res.render("user-restrooms", { restrooms }); // Render the EJS view with the fetched data
-  } catch (error) {
-    console.error("Error fetching user restrooms:", error);
-    res.status(500).send("Internal Server Error");
+    console.log("Fetching user restrooms for:", req.user); // Debugging
+    const restrooms = await Restroom.find({ user: req.user.id }).lean();
+    res.render("user-restrooms", { restrooms });
+  } catch (err) {
+    console.error(err);
+    res.redirect("/"); // Fallback in case of error
   }
 };
 

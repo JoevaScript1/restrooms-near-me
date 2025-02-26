@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Saved Restrooms</title>
-  <style>
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -30,7 +31,7 @@
       border-bottom: 1px solid #ddd;
       padding-bottom: 1rem;
     }
-  </style>
+  </style> -->
 </head>
 <body>
   <header>
@@ -43,12 +44,25 @@
           <h2><%= restroom.name %></h2>
           <p><strong>Street:</strong> <%= restroom.street %></p>
           <p><strong>Distance:</strong> <%= restroom.distance %></p>
-          <p><strong>Accessible:</strong> <%= restroom.accessibility %></p>
+          <p><strong>Accessible:</strong> <%= restroom.accessible %></p>
         </div>
       <% }); %>
     <% } else { %>
       <p>No saved restrooms yet. Start saving your favorite locations!</p>
     <% } %>
   </div>
+  <div class="button-container">
+    <a href="/map" class="button">Map View</a>
+    <a id="list-view-link" class="button">List View</a>
+  </div>
+<script>
+    navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords;
+        const listViewLink = document.getElementById('list-view-link');
+        listViewLink.href = `/api/restrooms?latitude=${latitude}&longitude=${longitude}&numberOnPage=50&page=1`;
+    }, (error) => {
+        console.error('Error getting location:', error);
+    });
+</script>
 </body>
 </html>

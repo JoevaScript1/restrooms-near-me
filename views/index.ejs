@@ -11,8 +11,25 @@
     <header>
     <h1>Public Restroom Finder! Sign Up or Log in to Save Your Favorite Restrooms!</h1>
     </header>
+        <% if (locals.messages.errors) { %>
+            <% messages.errors.forEach( el => { %>
+                <div class="alert alert-danger"><%= el.msg %></div>
+            <% }) %>    
+        <% } %>
+        <% if (locals.messages.info) { %>
+            <% messages.info.forEach( el => { %>
+                <div class="alert alert-danger"><%= el.msg %></div>
+            <% }) %>    
+        <% } %>
+        <div class = 'button-container'>
+        <form action="/login" method="POST">
+            <input type="email" name="email" placeholder="Email">
+            <input type="password" name="password" placeholder="Password">
+            <input class ="button" type="submit">
+        </form>
+        </div>
+
     <div class="button-container">
-        <a class="button" href="/login"> Login</a>
         <a class ="button" href="/signup"> Signup</a>
     </div>
 </body>

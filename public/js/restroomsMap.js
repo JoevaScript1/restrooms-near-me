@@ -34,23 +34,37 @@ function initMap() {
 
         const infowindow = new google.maps.InfoWindow({
           content: `
-            <div>
-              <b>${restroom.name || "Unnamed Restroom"}</b><br>
-              <strong>Address:</strong> ${
+            <div style="font-family: Arial, sans-serif; max-width: 220px; padding: 8px; line-height: 1.4;">
+              <b><i class="fas fa-map-marker-alt"></i> ${
+                restroom.name || "Unnamed Restroom"
+              }</b><br>
+              <strong><i class="fas fa-map-signs"></i> Address:</strong> ${
                 restroom.street || "Not available"
               }<br>
-              <strong>City:</strong> ${restroom.city || "Not available"}<br>
-              <strong>Distance:</strong> ${
+              <strong><i class="fas fa-city"></i> City:</strong> ${
+                restroom.city || "Not available"
+              }<br>
+              <strong><i class="fas fa-route"></i> Distance:</strong> ${
                 restroom.distance
                   ? restroom.distance.toFixed(2) + " miles"
                   : "Not available"
               }<br>
-              <strong>Accessible:</strong> ${
+              <strong><i class="fas fa-wheelchair"></i> Accessible:</strong> ${
                 restroom.accessible ? "Yes" : "No"
               }<br>
-              <strong>Unisex:</strong> ${restroom.unisex ? "Yes" : "No"}
+              <strong><i class="fas fa-venus-mars"></i> Unisex:</strong> ${
+                restroom.unisex ? "Yes" : "No"
+              }<br>
+              <strong><i class="fas fa-venus-mars"></i> Comment:</strong> ${
+                restroom.comment || "Not available"
+              }
+              <br>
+              <strong><i class="fas fa-venus-mars"></i> Directions:</strong> ${
+                restroom.directions || "Not available"
+              }
             </div>
           `,
+          maxWidth: 220,
         });
 
         marker.addListener("click", () => {

@@ -9,6 +9,7 @@ const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const restroomRoutes = require("./routes/restrooms");
+const userRoutes = require("./routes/user");
 const {
   getRestrooms,
   saveRestroom,
@@ -38,7 +39,7 @@ app.use(
     secret: "keyboard cat",
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: true }, // Set to true if using HTTPS
+    cookie: { secure: false }, // Set to true if using HTTPS
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
 );
@@ -51,6 +52,7 @@ app.use(flash());
 
 app.use("/", mainRoutes);
 app.use("/api/restrooms", restroomRoutes);
+app.use("/user", userRoutes);
 
 app.get("/map", renderMap);
 

@@ -15,7 +15,7 @@ A user-friendly web app that helps you quickly find gender-neutral and accessibl
 ## 🚀 Getting Started
 Clone the repo and install dependencies:
 
-git clone https://github.com/JoevaScript1/restrooms-near-you.git
+git clone https://github.com/JoevaScript1/restrooms-near-me.git
 cd restrooms-near-you
 npm install
 
